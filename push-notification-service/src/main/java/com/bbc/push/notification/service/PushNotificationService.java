@@ -1,4 +1,4 @@
-package com.bbc.push.notification.service.push_notification_service;
+package com.bbc.push.notification.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
