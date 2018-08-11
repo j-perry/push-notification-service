@@ -1,4 +1,4 @@
-package com.bbc.push.notification.service.push_notification_service;
+package com.bbc.push.notification.service;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
