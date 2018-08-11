@@ -1,33 +1,49 @@
 package com.bbc.push.notification.service;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 /**
- * Unit test for simple App.
+ * PushNotificationServiceControllerTest
  */
-public class AppTest extends TestCase {
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest(String testName) {
-        super(testName);
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+public class PushNotificationServiceControllerTest {
+	
+	@Autowired
+	private MockMvc mockMvc;
+	
+    @Before
+    public void setUp() {
+    	
+    }
+    
+    @After
+    public void tearDown() {
+    	
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite() {
-        return new TestSuite(AppTest.class);
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp() {
-        assertTrue( true );
+    @Test
+    public void testStatusEndpoint() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/")
+        		.accept(MediaType.APPLICATION_JSON_VALUE))
+        		.andExpect(status().isOk())
+        		.andExpect(content().string(equalTo("PushNotificationServiceController")));
     }
 }
