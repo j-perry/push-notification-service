@@ -44,6 +44,6 @@ public class PushNotificationServiceControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/")
         		.accept(MediaType.APPLICATION_JSON_VALUE))
         		.andExpect(status().isOk())
-        		.andExpect(content().string(equalTo("PushNotificationServiceController")));
+        		.andExpect(content().string(equalTo("Push Notification Service")));
     }
 }
