@@ -46,4 +46,9 @@ public class PushNotificationServiceControllerTest {
         		.andExpect(status().isOk())
         		.andExpect(content().string(equalTo("Push Notification Service")));
     }
+    
+    @Test
+    public void testCreateNewUser() throws Exception {
+    	
+    }
 }
