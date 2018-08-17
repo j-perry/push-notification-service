@@ -1,12 +1,10 @@
 package com.bbc.push.notification.service.model;
 
-import java.util.Date;
-
 public class User {
 	
 	private String username;
 	private String accessToken;
-	private Date creationTime;
+	private String creationTime;
 	private int numOfNotificationsPushed;
 	
 	public User() {
@@ -29,11 +27,11 @@ public class User {
 		this.accessToken = accessToken;
 	}
 
-	public Date getCreationTime() {
+	public String getCreationTime() {
 		return creationTime;
 	}
 
-	public void setCreationTime(Date creationTime) {
+	public void setCreationTime(String creationTime) {
 		this.creationTime = creationTime;
 	}
 
