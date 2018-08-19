@@ -1,5 +1,7 @@
 package com.bbc.push.notification.service.api;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,6 +39,20 @@ public class PushNotificationServiceController {
 			return new ResponseEntity<User>(responseUser, HttpStatus.CREATED);
 		} else {
 			return new ResponseEntity<User>(responseUser, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@RequestMapping(value = "/users/all",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<ArrayList<User>> getAllUsers() throws Exception {
+		ArrayList<User> users = notificationService.getAllUsers();
+		
+		if (users != null) {
+			return new ResponseEntity<ArrayList<User>>(users, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<ArrayList<User>>(users, HttpStatus.NOT_FOUND);
 		}
 	}
 
