@@ -86,12 +86,12 @@ public class PushNotificationServiceControllerIntegrationTest {
     	
     	HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<User> userOneEntity = new HttpEntity<User>(userOne, headers);
-		HttpEntity<User> userTwoEntity = new HttpEntity<User>(userTwo, headers);
 		
+		HttpEntity<User> userOneEntity = new HttpEntity<User>(userOne, headers);
     	ResponseEntity<User> postResponseOne = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, userOneEntity, User.class);
 		assertThat(postResponseOne.getStatusCode(), equalTo(HttpStatus.CREATED));
-
+		
+		HttpEntity<User> userTwoEntity = new HttpEntity<User>(userTwo, headers);
     	ResponseEntity<User> postResponseTwo = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, userTwoEntity, User.class);
 		assertThat(postResponseTwo.getStatusCode(), equalTo(HttpStatus.CREATED));
     	
