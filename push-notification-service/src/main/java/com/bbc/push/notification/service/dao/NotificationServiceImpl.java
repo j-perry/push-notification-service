@@ -3,9 +3,7 @@ package com.bbc.push.notification.service.dao;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.bbc.push.notification.service.model.User;
@@ -23,14 +21,18 @@ public class NotificationServiceImpl implements NotificationService {
 		LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 		
-		User user2 = new User();
-		user2.setUsername(user.getUsername());
-		user2.setAccessToken(user.getAccessToken());
-		user2.setCreationTime(now.format(formatter));
-		user2.setNumOfNotificationsPushed(0);
+		User newUser = new User();
+		newUser.setUsername(user.getUsername());
+		newUser.setAccessToken(user.getAccessToken());
+		newUser.setCreationTime(now.format(formatter));
+		newUser.setNumOfNotificationsPushed(0);
 		
-		this.users.add(user2);
-		return user2;
+		this.users.add(newUser);
+		return newUser;
+	}
+
+	public ArrayList<User> getAllUsers() {
+		return users;
 	}
 
 }
