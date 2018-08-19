@@ -36,9 +36,30 @@ public class PushNotificationServiceControllerIntegrationTest {
 	@Autowired
 	private TestRestTemplate restTemplate;
 	
+	private String createUserEndpoint;
+	
+	private User user1;
+	private User user2;
+	
 	@Before
 	public void setUp() throws Exception {
 		this.base = new URL("http://localhost:" + port + "/");
+		this.createUserEndpoint = base.toString() + "/create/user";
+		
+    	LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		
+		this.user1 = new User();
+		user1.setUsername("Jon");
+		user1.setAccessToken("abcd1234");
+    	user1.setCreationTime(now.format(formatter));
+    	user1.setNumOfNotificationsPushed(0);
+    	
+    	this.user2 = new User();
+    	user2.setUsername("Simon");
+    	user2.setAccessToken("td925nn9a");
+    	user2.setCreationTime(now.format(formatter));
+    	user2.setNumOfNotificationsPushed(0);
 	}
 	
 	@Test
@@ -46,15 +67,10 @@ public class PushNotificationServiceControllerIntegrationTest {
 		String accessToken = "abcd1234";
 		String username = "Jon";
 		
-		User user = new User();
-		user.setUsername(username);
-		user.setAccessToken(accessToken);
-		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<User> entity = new HttpEntity<User>(user, headers);
+		HttpEntity<User> entity = new HttpEntity<User>(user1, headers);
 		
-		String createUserEndpoint = base.toString() + "/create/user";
 		ResponseEntity<User> response = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, entity, User.class);
 		
 		assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));
@@ -67,27 +83,12 @@ public class PushNotificationServiceControllerIntegrationTest {
 	@Test
 	public void testGetAllUsers() throws Exception {
 		final int length = 2;
-    	LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        
-        User user1 = new User();
-    	user1.setUsername("Alfie");
-    	user1.setAccessToken("s235svvf7");
-    	user1.setCreationTime(now.format(formatter));
-    	user1.setNumOfNotificationsPushed(0);
-    	
-    	User user2 = new User();
-    	user2.setUsername("Simon");
-    	user2.setAccessToken("td925nn9a");
-    	user2.setCreationTime(now.format(formatter));
-    	user2.setNumOfNotificationsPushed(0);
     	
     	HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<User> userOneEntity = new HttpEntity<User>(user1, headers);
 		HttpEntity<User> userTwoEntity = new HttpEntity<User>(user2, headers);
 		
-    	String createUserEndpoint = base.toString() + "/create/user";
     	ResponseEntity<User> postResponseOne = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, userOneEntity, User.class);
 		assertThat(postResponseOne.getStatusCode(), equalTo(HttpStatus.CREATED));
 
