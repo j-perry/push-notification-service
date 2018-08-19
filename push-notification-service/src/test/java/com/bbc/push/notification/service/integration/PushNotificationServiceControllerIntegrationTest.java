@@ -38,8 +38,8 @@ public class PushNotificationServiceControllerIntegrationTest {
 	
 	private String createUserEndpoint;
 	
-	private User user1;
-	private User user2;
+	private User userOne;
+	private User userTwo;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -49,17 +49,17 @@ public class PushNotificationServiceControllerIntegrationTest {
     	LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 		
-		this.user1 = new User();
-		user1.setUsername("Jon");
-		user1.setAccessToken("abcd1234");
-    	user1.setCreationTime(now.format(formatter));
-    	user1.setNumOfNotificationsPushed(0);
+		this.userOne = new User();
+		userOne.setUsername("Jon");
+		userOne.setAccessToken("abcd1234");
+    	userOne.setCreationTime(now.format(formatter));
+    	userOne.setNumOfNotificationsPushed(0);
     	
-    	this.user2 = new User();
-    	user2.setUsername("Simon");
-    	user2.setAccessToken("td925nn9a");
-    	user2.setCreationTime(now.format(formatter));
-    	user2.setNumOfNotificationsPushed(0);
+    	this.userTwo = new User();
+    	userTwo.setUsername("Simon");
+    	userTwo.setAccessToken("td925nn9a");
+    	userTwo.setCreationTime(now.format(formatter));
+    	userTwo.setNumOfNotificationsPushed(0);
 	}
 	
 	@Test
@@ -69,7 +69,7 @@ public class PushNotificationServiceControllerIntegrationTest {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<User> entity = new HttpEntity<User>(user1, headers);
+		HttpEntity<User> entity = new HttpEntity<User>(userOne, headers);
 		
 		ResponseEntity<User> response = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, entity, User.class);
 		
@@ -86,8 +86,8 @@ public class PushNotificationServiceControllerIntegrationTest {
     	
     	HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<User> userOneEntity = new HttpEntity<User>(user1, headers);
-		HttpEntity<User> userTwoEntity = new HttpEntity<User>(user2, headers);
+		HttpEntity<User> userOneEntity = new HttpEntity<User>(userOne, headers);
+		HttpEntity<User> userTwoEntity = new HttpEntity<User>(userTwo, headers);
 		
     	ResponseEntity<User> postResponseOne = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, userOneEntity, User.class);
 		assertThat(postResponseOne.getStatusCode(), equalTo(HttpStatus.CREATED));
