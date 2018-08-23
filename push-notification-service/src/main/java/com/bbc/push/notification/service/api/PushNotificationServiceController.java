@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bbc.push.notification.service.dao.NotificationServiceImpl;
+import com.bbc.push.notification.service.model.Note;
 import com.bbc.push.notification.service.model.User;
 
 @RestController
@@ -47,12 +49,28 @@ public class PushNotificationServiceController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<ArrayList<User>> getAllUsers() throws Exception {
-		ArrayList<User> users = notificationService.getAllUsers();
+		ArrayList<User> users = notificationService.getUsers();
 		
 		if (users != null) {
 			return new ResponseEntity<ArrayList<User>>(users, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<ArrayList<User>>(users, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@RequestMapping(value = "/create/push",
+		method = RequestMethod.POST,
+		consumes = MediaType.APPLICATION_JSON_VALUE,
+		produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<User> createPost(@RequestParam("username") String username,
+			@RequestBody Note note) throws Exception {
+		User responseUser = notificationService.createPost(username, note);
+		
+		if (responseUser != null) {
+			return new ResponseEntity<User>(responseUser, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<User>(responseUser, HttpStatus.NOT_FOUND);
 		}
 	}
 
