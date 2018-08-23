@@ -1,4 +1,4 @@
-package com.bbc.push.notification.service.integration;
+package com.bbc.push.notification.service.api.integration;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -10,6 +10,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -22,11 +24,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.bbc.push.notification.service.model.Note;
 import com.bbc.push.notification.service.model.User;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PushNotificationServiceControllerIntegrationTest {
+	
+	private static final Logger log = LoggerFactory.getLogger(PushNotificationServiceControllerIntegrationTest.class);
 	
 	@LocalServerPort
 	private int port;
@@ -57,7 +62,7 @@ public class PushNotificationServiceControllerIntegrationTest {
     	
     	this.userTwo = new User();
     	userTwo.setUsername("Simon");
-    	userTwo.setAccessToken("td925nn9a");
+    	userTwo.setAccessToken("efgh5678");
     	userTwo.setCreationTime(now.format(formatter));
     	userTwo.setNumOfNotificationsPushed(0);
 	}
@@ -71,6 +76,7 @@ public class PushNotificationServiceControllerIntegrationTest {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<User> entity = new HttpEntity<User>(userOne, headers);
 		
+		log.info(createUserEndpoint);
 		ResponseEntity<User> response = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, entity, User.class);
 		
 		assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));
@@ -105,6 +111,32 @@ public class PushNotificationServiceControllerIntegrationTest {
 		assertThat(response.getHeaders().getContentType(), equalTo(MediaType.APPLICATION_JSON_UTF8));
 		assertThat(response.getBody(), is(notNullValue()));
 		assertThat(response.getBody().length, equalTo(length));
+	}
+	
+	@Test
+	public void testCreatePush() throws Exception {
+		final String createPostEndpoint = base.toString() + "/create/push?username=";
+		final String username = "Jon";
+		Note note = new Note();
+		note.setBody("Hello, this message has been sent from JUnit 4!");
+		note.setTitle("Integration Test");
+		note.setType("note");
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		HttpEntity<User> entity = new HttpEntity<User>(userOne, headers);
+		
+		ResponseEntity<User> createResponse = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, entity, User.class);
+		assertThat(createResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+		
+		HttpEntity<Note> postEntity = new HttpEntity<Note>(note, headers);
+		log.info(new String(createPostEndpoint + username));
+		ResponseEntity<User> postResponse = restTemplate.exchange(new String(createPostEndpoint + username), HttpMethod.POST, postEntity, User.class);
+		log.info(postResponse.toString());
+		
+		assertThat(postResponse.getStatusCode(), equalTo(HttpStatus.OK));
+		assertThat(postResponse.getHeaders().getContentType(), equalTo(MediaType.APPLICATION_JSON_UTF8));
+		assertThat(postResponse.getBody(), is(notNullValue()));
 	}
 
 }
