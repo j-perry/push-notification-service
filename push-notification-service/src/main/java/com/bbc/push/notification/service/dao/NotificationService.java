@@ -9,7 +9,7 @@ public interface NotificationService {
 
 	public User createUser(User user);
 	public ArrayList<User> getUsers();
-	public User createPost(String username, Note note) throws Exception;
+	public User createPush(String username, Note note) throws Exception;
 	public User findUser(String username);
 	public boolean updateUserNumOfNotificationsPushed(User user);
 	
