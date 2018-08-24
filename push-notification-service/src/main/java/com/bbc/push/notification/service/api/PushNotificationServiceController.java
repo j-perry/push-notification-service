@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bbc.push.notification.service.dao.NotificationServiceImpl;
 import com.bbc.push.notification.service.model.Note;
 import com.bbc.push.notification.service.model.User;
+import com.bbc.push.notification.service.services.NotificationServiceImpl;
 
 @RestController
 public class PushNotificationServiceController {
