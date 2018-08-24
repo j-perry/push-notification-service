@@ -62,7 +62,7 @@ public class PushNotificationServiceControllerTest {
     	LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     	
-    	user.setAccessToken("sdfdsfsd");
+    	user.setAccessToken("access-token");
     	user.setCreationTime(now.format(formatter));
     	user.setUsername("Jon");
     	user.setNumOfNotificationsPushed(0);
