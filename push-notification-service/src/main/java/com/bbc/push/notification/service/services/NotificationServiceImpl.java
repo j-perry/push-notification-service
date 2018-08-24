@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import javax.xml.ws.soap.AddressingFeature.Responses;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -14,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import com.bbc.push.notification.service.model.Note;
@@ -45,12 +48,13 @@ public class NotificationServiceImpl implements NotificationService {
 		return newUser;
 	}
 
-	public User createPush(String username, Note note) throws Exception {
+	public ResponseEntity<User> createPush(String username, Note note) throws Exception {
 		final String pushBulletCreatePostEndpoint = "https://api.pushbullet.com/v2/pushes";
+		ResponseEntity<User> response = null;
 		User user = findUser(username);
 		
 		if (user == null)
-			return null;
+			return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -61,16 +65,22 @@ public class NotificationServiceImpl implements NotificationService {
 		log.info("Response Headers: " + entity.getHeaders().toString());		
 		log.info("Access-Token: " + user.getAccessToken());
 		
-		ResponseEntity<User> response = restTemplate.exchange(pushBulletCreatePostEndpoint, HttpMethod.POST, entity, User.class);
-		
-		if (response.getStatusCode().equals(HttpStatus.OK)) {			
-			updateUserNumOfNotificationsPushed(user);
-			user = findUser(username);
-		} else {
-			return null;
+		try {
+			response = restTemplate.exchange(pushBulletCreatePostEndpoint, HttpMethod.POST, entity, User.class);
+		} catch (HttpStatusCodeException ex) {			
+			if (ex.getStatusCode().equals(HttpStatus.UNAUTHORIZED))
+				return new ResponseEntity<User>(user, HttpStatus.UNAUTHORIZED);
+			else if (ex.getStatusCode().equals(HttpStatus.INTERNAL_SERVER_ERROR))
+				return new ResponseEntity<User>(user, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		return user;
+		if (response.getStatusCode().equals(HttpStatus.OK)) {
+			updateUserNumOfNotificationsPushed(user);
+			user = findUser(username);
+			return new ResponseEntity<User>(user, HttpStatus.CREATED);
+		}
+		
+		return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
 	}
 
 	/**

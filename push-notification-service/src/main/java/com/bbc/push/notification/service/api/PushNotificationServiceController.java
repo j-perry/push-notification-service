@@ -65,13 +65,7 @@ public class PushNotificationServiceController {
 	@ResponseBody
 	public ResponseEntity<User> createPost(@RequestParam("username") String username,
 			@RequestBody Note note) throws Exception {
-		User responseUser = notificationService.createPush(username, note);
-		
-		if (responseUser != null) {
-			return new ResponseEntity<User>(responseUser, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<User>(responseUser, HttpStatus.NOT_FOUND);
-		}
+		return notificationService.createPush(username, note);
 	}
 
 }
