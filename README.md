@@ -29,8 +29,8 @@ This will return the following response and format:
 ```
 {
     "username": "user", 
-    "accessToken": "<access token>",
-    “creationTime”: “<YYYY-mm-dd T HH:mm:ss>",
+    "accessToken": "<access-token>",
+    “creationTime”: “<YYYY-mm-ddTHH:mm:ss>",
     “numOfNotificationsPushed”: 0
 } 
 ```
@@ -39,7 +39,7 @@ This will return the following response and format:
 
 This endpoint returns a list of all users registered to the service
 
-## Endpoint */create/push?username*
+## Endpoint */create/push?username=<value>*
 
 This endpoint creates a new push request to Pushbullet, passing in as a request parameter 'username'.
 
