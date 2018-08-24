@@ -142,6 +142,10 @@ public class PushNotificationServiceControllerIntegrationTest {
 		assertThat(postResponse.getStatusCode(), equalTo(HttpStatus.OK));
 		assertThat(postResponse.getHeaders().getContentType(), equalTo(MediaType.APPLICATION_JSON_UTF8));
 		assertThat(postResponse.getBody(), is(notNullValue()));
+		assertThat(postResponse.getBody().getUsername(), equalTo(username));
+		assertThat(postResponse.getBody().getAccessToken(), equalTo(userOne.getAccessToken()));
+		assertThat(postResponse.getBody().getCreationTime(), equalTo(userOne.getCreationTime()));
+		assertThat(postResponse.getBody().getNumOfNotificationsPushed(), equalTo(1));
 	}
 
 }
