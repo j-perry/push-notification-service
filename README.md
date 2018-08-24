@@ -1,5 +1,5 @@
 # push-notification-service
-Push Notification Service written in Java 8 and Spring Boot with Maven, and TDD/BDD for integration tests.
+Push Notification Service written in Java 8, Spring Boot, Maven and TDD/BDD using JUnit 4 and Hamcrest for integration tests.
 
 ## Installation
 
