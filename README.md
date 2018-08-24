@@ -15,7 +15,7 @@ There are three RESTful API endpoints. They may be accessed as follows:
 - http://localhost:port//PushNotificationService/users/all
 - http://localhost:port//PushNotificationService/create/push?username
 
-Where *port* denotes where it is running locally. You will need to add this both to integration and manual testing tools such as Postman.
+Where *port* denotes where it is running locally. You will need to add this both to integration tests and manual testing tools such as Postman for it to work.
 
 ## POST */create/user*
 
