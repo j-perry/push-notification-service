@@ -3,7 +3,7 @@ Push Notification Service written in Java 8 and Spring Boot with Maven
 
 ## Installation
 
-To run the application, please use Eclipse IDE. It may be started using **mvn install clean spring-boot:run** from a terminal or **install clean spring-boot:run** from inside Eclipse.
+To run the application, please use Eclipse. It may be started using ```mvn install clean spring-boot:run``` from a terminal or ```install clean spring-boot:run``` from inside Eclipse.
 
 ## Usage
 
@@ -24,7 +24,7 @@ This endpoint creates a new user, passing into the body:
 }
 ```
 
-This will return the following response and format:
+This will return the following response:
 
 ```
 {
@@ -41,9 +41,11 @@ This endpoint returns a list of all users registered to the service
 
 ## POST */create/push?username=value*
 
-This endpoint creates a new push request to Pushbullet, passing in as a request parameter 'username'.
+This endpoint creates a new push notification request to Pushbullet, passing in as a request parameter 'username'.
 
-In addition to specifying a ```Content-Type``` of ```'application/json'``` in the Header, you will also need to add a header key/value of:
+Before creating a new push notification to Pushbullet, it will look up an existing user on the service and then retrieve the corresponding access token. 
+
+In addition to specifying a ```Content-Type``` of ```application/json``` in the Header, you will also need to add a header key/value of:
 
 ```
 Access-Token: <accessToken>
