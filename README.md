@@ -84,6 +84,8 @@ To create a new push notification to Pushbullet, specify the following body:
 }
 ```
 
+Where it specifies the ```"type"```, you will want to specify ```"note"```.
+
 This will return the following response:
 
 ```
