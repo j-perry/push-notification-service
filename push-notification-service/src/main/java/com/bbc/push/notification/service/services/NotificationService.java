@@ -1,4 +1,4 @@
-package com.bbc.push.notification.service.dao;
+package com.bbc.push.notification.service.services;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.bbc.push.notification.service.dao;
+package com.bbc.push.notification.service.services;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,16 +18,17 @@ import org.springframework.web.client.RestTemplate;
 
 import com.bbc.push.notification.service.model.Note;
 import com.bbc.push.notification.service.model.User;
+import com.bbc.push.notification.service.repository.NotificationRepositoryImpl;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
 	
-	private ArrayList<User> users;
+	private NotificationRepositoryImpl notificationRepositoryImpl;
 	
 	private static final Logger log = LoggerFactory.getLogger(NotificationServiceImpl.class);
 	
 	public NotificationServiceImpl() {
-		this.users = new ArrayList<User>();
+		this.notificationRepositoryImpl = new NotificationRepositoryImpl();
 	}
 
 	public User createUser(User user) {
@@ -40,7 +41,7 @@ public class NotificationServiceImpl implements NotificationService {
 		newUser.setCreationTime(now.format(formatter));
 		newUser.setNumOfNotificationsPushed(0);
 		
-		addUser(newUser);
+		notificationRepositoryImpl.addUser(newUser);
 		return newUser;
 	}
 
@@ -107,23 +108,15 @@ public class NotificationServiceImpl implements NotificationService {
 		}).collect(Collectors.toList()));
 		
 		if (!updatedUsers.isEmpty()) {			
-			setUsers(updatedUsers);
+			notificationRepositoryImpl.setUsers(updatedUsers);
 			updated = true;
 		}
 		
 		return updated;
 	}
 	
-	private void addUser(User user) {
-		this.users.add(user);
-	}
-	
 	public ArrayList<User> getUsers() {
-		return users;
+		return notificationRepositoryImpl.getUsers();
 	}
 	
-	private void setUsers(ArrayList<User> users) {
-		this.users = users;
-	}
-
 }
