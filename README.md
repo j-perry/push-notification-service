@@ -67,6 +67,16 @@ To create a new push notification to Pushbullet, specify the following body:
 }
 ```
 
+This will return the following response:
+
+```
+{
+    
+}
+```
+
+Where ```numOfNotificationsPushed``` increments after the push notification request has been made to Pushbullet, updating the corresponding user in the users list.
+
 ## Testing
 
 The application may be tested both within Eclipse and using a third party API environment tool such as [Postman](https://www.getpostman.com/apps).
