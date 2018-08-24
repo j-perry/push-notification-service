@@ -61,7 +61,7 @@ public class PushNotificationServiceControllerIntegrationTest {
 		
 		this.userOne = new User();
 		userOne.setUsername("Jon");
-		userOne.setAccessToken("abcd1234");
+		userOne.setAccessToken("accessToken");
     	userOne.setCreationTime(now.format(formatter));
     	userOne.setNumOfNotificationsPushed(0);
     	
@@ -74,7 +74,7 @@ public class PushNotificationServiceControllerIntegrationTest {
 	
 	@Test
 	public void testCreateUser() throws Exception {
-		String accessToken = "abcd1234";
+		String accessToken = "accessToken";
 		String username = "Jon";
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -137,7 +137,7 @@ public class PushNotificationServiceControllerIntegrationTest {
 		HttpEntity<Note> postEntity = new HttpEntity<Note>(note, headers);
 		log.info(new String(createPostEndpoint + username));
 		ResponseEntity<User> postResponse = restTemplate.exchange(new String(createPostEndpoint + username), HttpMethod.POST, postEntity, User.class);
-		log.info(postResponse.toString());
+		log.info("postResponse: " + postResponse.toString());
 		
 		assertThat(postResponse.getStatusCode(), equalTo(HttpStatus.OK));
 		assertThat(postResponse.getHeaders().getContentType(), equalTo(MediaType.APPLICATION_JSON_UTF8));
