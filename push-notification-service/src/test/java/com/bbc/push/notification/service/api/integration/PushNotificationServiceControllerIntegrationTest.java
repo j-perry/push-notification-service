@@ -4,6 +4,8 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javax.servlet.ServletContext;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -36,6 +38,9 @@ public class PushNotificationServiceControllerIntegrationTest {
 	@LocalServerPort
 	private int port;
 	
+	@Autowired
+	private ServletContext servletContext;
+	
 	private URL base;
 	
 	@Autowired
@@ -48,7 +53,7 @@ public class PushNotificationServiceControllerIntegrationTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		this.base = new URL("http://localhost:" + port + "/");
+		this.base = new URL("http://localhost:" + port + "/" + servletContext.getContextPath());
 		this.createUserEndpoint = base.toString() + "/create/user";
 		
     	LocalDateTime now = LocalDateTime.now();
