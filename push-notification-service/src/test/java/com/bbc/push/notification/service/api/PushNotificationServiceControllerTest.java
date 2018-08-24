@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.bbc.push.notification.service.model.Note;
 import com.bbc.push.notification.service.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -81,7 +82,7 @@ public class PushNotificationServiceControllerTest {
     @Test
     public void testGetAllUsers() throws Exception {
     	LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");    	
     	
     	user.setUsername("Jon");
     	user.setAccessToken("access-token");
@@ -103,5 +104,5 @@ public class PushNotificationServiceControllerTest {
     			.andExpect(status().isOk())
     			.andExpect(jsonPath("$", hasSize(1)));
     }
-    
+        
 }
