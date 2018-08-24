@@ -1,4 +1,4 @@
-package com.bbc.push.notification.service;
+package com.bbc.push.notification.service.api;
 
 import org.junit.After;
 import org.junit.Before;
