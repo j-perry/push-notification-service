@@ -32,7 +32,7 @@ This will return the following response:
 {
     "username": "user", 
     "accessToken": "<access-token>",
-    “creationTime”: “<YYYY-mm-ddTHH:mm:ss>",
+    “creationTime”: “<YYYY-mm-dd HH:mm:ss>",
     “numOfNotificationsPushed”: 0
 } 
 ```
