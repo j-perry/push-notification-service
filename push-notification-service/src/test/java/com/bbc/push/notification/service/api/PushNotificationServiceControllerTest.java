@@ -12,16 +12,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.bbc.push.notification.service.model.Note;
 import com.bbc.push.notification.service.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 /**
  * PushNotificationServiceControllerTest
@@ -62,9 +64,9 @@ public class PushNotificationServiceControllerTest {
     	LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     	
+    	user.setUsername("Jon");
     	user.setAccessToken("access-token");
     	user.setCreationTime(now.format(formatter));
-    	user.setUsername("Jon");
     	user.setNumOfNotificationsPushed(0);
     	
     	String json = mapper.writeValueAsString(user);
@@ -77,4 +79,30 @@ public class PushNotificationServiceControllerTest {
     			.andExpect(content().json(json));
     }
     
+    @Test
+    public void testGetAllUsers() throws Exception {
+    	LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");    	
+    	
+    	user.setUsername("Jon");
+    	user.setAccessToken("access-token");
+    	user.setCreationTime(now.format(formatter));
+    	user.setNumOfNotificationsPushed(0);
+    	
+    	String json = mapper.writeValueAsString(user);
+    	
+    	mockMvc.perform(MockMvcRequestBuilders.post("/create/user")
+    			.contentType(MediaType.APPLICATION_JSON_VALUE)
+    			.content(json)
+    			.accept(MediaType.APPLICATION_JSON_VALUE))
+    			.andExpect(status().isCreated())
+    			.andExpect(content().json(json));
+    	
+    	mockMvc.perform(MockMvcRequestBuilders.get("/users/all")
+    			.accept(MediaType.APPLICATION_JSON_VALUE))
+    			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+    			.andExpect(status().isOk())
+    			.andExpect(jsonPath("$", hasSize(1)));
+    }
+        
 }

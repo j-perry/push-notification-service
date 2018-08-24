@@ -1,8 +1,6 @@
 package com.bbc.push.notification.service.api.integration;
 
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletContext;
 
@@ -55,21 +53,14 @@ public class PushNotificationServiceControllerIntegrationTest {
 	public void setUp() throws Exception {
 		this.base = new URL("http://localhost:" + port + "/" + servletContext.getContextPath());
 		this.createUserEndpoint = base.toString() + "/create/user";
-		
-    	LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-		
+				
 		this.userOne = new User();
 		userOne.setUsername("Jon");
 		userOne.setAccessToken("accessToken");
-    	userOne.setCreationTime(now.format(formatter));
-    	userOne.setNumOfNotificationsPushed(0);
     	
     	this.userTwo = new User();
     	userTwo.setUsername("Simon");
     	userTwo.setAccessToken("efgh5678");
-    	userTwo.setCreationTime(now.format(formatter));
-    	userTwo.setNumOfNotificationsPushed(0);
 	}
 	
 	@Test
