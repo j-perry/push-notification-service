@@ -139,13 +139,36 @@ public class PushNotificationServiceControllerIntegrationTest {
 		ResponseEntity<User> postResponse = restTemplate.exchange(new String(createPostEndpoint + username), HttpMethod.POST, postEntity, User.class);
 		log.info("postResponse: " + postResponse.toString());
 		
-		assertThat(postResponse.getStatusCode(), equalTo(HttpStatus.OK));
+		assertThat(postResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
 		assertThat(postResponse.getHeaders().getContentType(), equalTo(MediaType.APPLICATION_JSON_UTF8));
 		assertThat(postResponse.getBody(), is(notNullValue()));
 		assertThat(postResponse.getBody().getUsername(), equalTo(username));
 		assertThat(postResponse.getBody().getAccessToken(), equalTo(userOne.getAccessToken()));
-		assertThat(postResponse.getBody().getCreationTime(), equalTo(userOne.getCreationTime()));
 		assertThat(postResponse.getBody().getNumOfNotificationsPushed(), equalTo(1));
+	}
+	
+	@Test
+	public void testCreatePushIsNotCreated() {
+		final String createPostEndpoint = base.toString() + "/create/push?username=";
+		final String username = "Simon";
+		Note note = new Note();
+		note.setBody("Hello, this message has been sent from JUnit 4!");
+		note.setTitle("Integration Test");
+		note.setType("note");
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		HttpEntity<User> entity = new HttpEntity<User>(userTwo, headers);
+		
+		ResponseEntity<User> createResponse = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, entity, User.class);
+		assertThat(createResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+		
+		HttpEntity<Note> postEntity = new HttpEntity<Note>(note, headers);
+		log.info(new String(createPostEndpoint + username));
+		ResponseEntity<User> postResponse = restTemplate.exchange(new String(createPostEndpoint + username), HttpMethod.POST, postEntity, User.class);
+		log.info("postResponse: " + postResponse.toString());
+		
+		assertThat(postResponse.getStatusCode(), equalTo(HttpStatus.UNAUTHORIZED));
 	}
 
 }
