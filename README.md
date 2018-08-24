@@ -1,5 +1,5 @@
 # push-notification-service
-Push Notification Service written in Java 8 and Spring Boot with Maven
+Push Notification Service written in Java 8 and Spring Boot with Maven.
 
 ## Installation
 
@@ -64,3 +64,11 @@ To create a new push notification to Pushbullet, specify the following body:
     "title": "<title>"
 }
 ```
+
+## Testing
+
+The application may be tested both within Eclipse and using a third party API environment tool such as Postman.
+
+[Postman](https://www.getpostman.com/apps)
+
+The application has a number of integration tests that may be executed within the application.
