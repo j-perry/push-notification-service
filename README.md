@@ -11,9 +11,9 @@ There are no databases used for this application - data is persisted locally thr
 
 There are three RESTful API endpoints. They may be accessed as follows:
 
-- http://localhost:<port>//PushNotificationService/create/user
-- http://localhost:<port>//PushNotificationService/users/all
-- http://localhost:<port>//PushNotificationService/create/push?username
+- http://localhost:\<port>\//PushNotificationService/create/user
+- http://localhost:\<port>\//PushNotificationService/users/all
+- http://localhost:\<port>\//PushNotificationService/create/push?username
 
 ## POST */create/user*
 
