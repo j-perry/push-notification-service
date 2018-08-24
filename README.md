@@ -47,13 +47,13 @@ This will return the following response:
 [
     {
         "username": "name",
-        "accessToken": “accessToken",
+        "accessToken": “access-token",
         "creationTime": "24-08-2018 16:56:10",
         "numOfNotificationsPushed": 0
     },
     {
         "username": "name",
-        "accessToken": “accessToken",
+        "accessToken": “access-token",
         "creationTime": "24-08-2018 16:57:41",
         "numOfNotificationsPushed": 0
     }
@@ -69,7 +69,7 @@ Before creating a new push notification to Pushbullet, it will look up an existi
 In addition to specifying a ```Content-Type``` of ```application/json``` in the Header, you will also need to add a header key/value of:
 
 ```
-Access-Token: <accessToken>
+Access-Token: <access-token>
 ```
 
 Where ```<accessToken>``` corresponds with the access token sent with the submission of this exercise, or one you have created personally.
@@ -89,7 +89,7 @@ This will return the following response:
 ```
 {
     "username": "name",
-    "accessToken": "accessToken",
+    "accessToken": "access-token",
     "creationTime": "24-08-2018 17:38:41",
     "numOfNotificationsPushed": 1
 }
