@@ -49,9 +49,8 @@ public class NotificationServiceImpl implements NotificationService {
 		final String pushBulletCreatePostEndpoint = "https://api.pushbullet.com/v2/pushes";
 		User user = findUser(username);
 		
-		if (user == null) {
+		if (user == null)
 			return null;
-		}
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -64,13 +63,14 @@ public class NotificationServiceImpl implements NotificationService {
 		
 		ResponseEntity<User> response = restTemplate.exchange(pushBulletCreatePostEndpoint, HttpMethod.POST, entity, User.class);
 		
-		if (response.getStatusCode().equals(HttpStatus.OK)) {
+		if (response.getStatusCode().equals(HttpStatus.OK)) {			
 			updateUserNumOfNotificationsPushed(user);
+			user = findUser(username);
 		} else {
 			return null;
 		}
 		
-		return response.getBody();
+		return user;
 	}
 
 	/**
@@ -89,8 +89,10 @@ public class NotificationServiceImpl implements NotificationService {
 		boolean updated = false;
 		User updateUser = findUser(user.getUsername());
 		int noNotificationsPushed = updateUser.getNumOfNotificationsPushed();
-		updateUser.setNumOfNotificationsPushed(noNotificationsPushed++);
+		updateUser.setNumOfNotificationsPushed(++noNotificationsPushed);
 		
+		log.info("numOfNotificationsPushed: " + updateUser.getNumOfNotificationsPushed());
+				
 		// update all users including modified user's no. notifications pushed
 		ArrayList<User> updatedUsers = new ArrayList<User>(getUsers().stream().map(u -> {
 			User newUser = new User();
