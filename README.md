@@ -43,7 +43,15 @@ This endpoint returns a list of all users registered to the service
 
 This endpoint creates a new push request to Pushbullet, passing in as a request parameter 'username'.
 
-To create a new push to Pushbullet, specify in the body the following parameters:
+In addition to specifying a ```Content-Type``` of ```'application/json'``` in the Header, you will also need to add a header key/value of:
+
+```
+Access-Token: <accessToken>
+```
+
+Where ```<accessToken>``` corresponds with the access token sent with the submission of this exercise, or one you have created personally.
+
+To create a new push notification to Pushbullet, specify in the body the following body:
 
 ```
 {
