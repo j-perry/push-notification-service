@@ -55,7 +55,7 @@ Access-Token: <accessToken>
 
 Where ```<accessToken>``` corresponds with the access token sent with the submission of this exercise, or one you have created personally.
 
-To create a new push notification to Pushbullet, specify in the body the following body:
+To create a new push notification to Pushbullet, specify the following body:
 
 ```
 {
