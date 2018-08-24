@@ -72,7 +72,7 @@ In addition to specifying a ```Content-Type``` of ```application/json``` in the 
 Access-Token: <access-token>
 ```
 
-Where ```<accessToken>``` corresponds with the access token sent with the submission of this exercise, or one you have created personally.
+Where ```<access-token>``` corresponds with the access token sent with the submission of this exercise, or one you have created personally.
 
 To create a new push notification to Pushbullet, specify the following body:
 
