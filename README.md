@@ -13,7 +13,7 @@ There are three RESTful API endpoints. They may be accessed as follows:
 - http://localhost:<port>//PushNotificationService/users/all
 - http://localhost:<port>//PushNotificationService/create/push?username
 
-## Endpoint */create/user*
+## POST */create/user*
 
 This endpoint creates a new user, passing into the body:
 
@@ -35,11 +35,11 @@ This will return the following response and format:
 } 
 ```
 
-## Endpoint */users/all*
+## GET */users/all*
 
 This endpoint returns a list of all users registered to the service
 
-## Endpoint */create/push?username=<value>*
+## POST */create/push?username=value*
 
 This endpoint creates a new push request to Pushbullet, passing in as a request parameter 'username'.
 
