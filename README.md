@@ -41,7 +41,26 @@ This will return the following response:
 
 ## GET */users/all*
 
-This endpoint returns a list of all users registered to the service
+This endpoint returns a list of all users registered to the service.
+
+This will return the following response:
+
+```
+[
+    {
+        "username": "name",
+        "accessToken": “accessToken",
+        "creationTime": "24-08-2018 16:56:10",
+        "numOfNotificationsPushed": 0
+    },
+    {
+        "username": "name",
+        "accessToken": “accessToken",
+        "creationTime": "24-08-2018 16:57:41",
+        "numOfNotificationsPushed": 0
+    }
+]
+```
 
 ## POST */create/push?username=value*
 
@@ -62,10 +81,23 @@ To create a new push notification to Pushbullet, specify the following body:
 ```
 {
     "body": "<body of text>",
-    "type": "<type>",
-    "title": "<title>"
+    "title": "<title>",
+    "type": "<type>"
 }
 ```
+
+This will return the following response:
+
+```
+{
+    "username": "name",
+    "accessToken": "accessToken",
+    "creationTime": "24-08-2018 17:38:41",
+    "numOfNotificationsPushed": 1
+}
+```
+
+Where ```numOfNotificationsPushed``` increments after the push notification request has been made to Pushbullet, updating the corresponding user in the users list.
 
 ## Testing
 
