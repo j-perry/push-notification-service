@@ -23,7 +23,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * PushNotificationServiceControllerTest
@@ -61,13 +60,10 @@ public class PushNotificationServiceControllerTest {
     }
     
     @Test
-    public void testCreateUser() throws Exception {
-    	LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-    	
+    public void testCreateUser() throws Exception {    	
     	user.setUsername("username1");
     	user.setAccessToken("access-token");
-    	user.setCreationTime(now.format(formatter));
+    	user.setCreationTime(LocalDateTime.now().withNano(0).toString());
     	user.setNumOfNotificationsPushed(0);
     	
     	String json = mapper.writeValueAsString(user);
