@@ -109,3 +109,5 @@ Where ```numOfNotificationsPushed``` increments after the push notification requ
 The application may be tested both within Eclipse and using a third party API environment tool such as [Postman](https://www.getpostman.com/apps).
 
 The application has a number of unit and integration tests that may be executed within the application that have been written using TDD/BDD in JUnit 4 and Hamcrest.
+
+To run the integration tests, replace ```.setAccessToken("accessToken")``` on line 61 in ```com.bbc.push.notification.service.api.integration.PushNotificationServiceControllerIntegrationTest.java```.
