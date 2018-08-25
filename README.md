@@ -37,6 +37,17 @@ This will return the following response:
 } 
 ```
 
+Duplicate entries cannot be made. If you try to create a duplicate user entry, you will receive the following ```409 - Conflict``` response:
+
+```
+{
+    "username": "Jon", 
+    "accessToken": "abcd1234",
+    “creationTime”: “24-08-2018 16:57:41",
+    “numOfNotificationsPushed”: 0
+} 
+```
+
 ## GET */users/all*
 
 This endpoint returns a list of all users registered to the service.
