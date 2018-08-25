@@ -35,14 +35,11 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	public User createUser(User user) {
-		LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-		
         if (findUser(user.getUsername()) == null) {
         	User newUser = new User();
     		newUser.setUsername(user.getUsername());
     		newUser.setAccessToken(user.getAccessToken());
-    		newUser.setCreationTime(now.format(formatter));
+    		newUser.setCreationTime(LocalDateTime.now().withNano(0).toString());
     		newUser.setNumOfNotificationsPushed(0);
     		
     		notificationRepositoryImpl.addUser(newUser);
