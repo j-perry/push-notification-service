@@ -62,7 +62,7 @@ public class PushNotificationServiceControllerIntegrationTest {
     	
     	this.userTwo = new User();
     	userTwo.setUsername("username2");
-    	userTwo.setAccessToken("efgh5678");
+    	userTwo.setAccessToken("accessToken");
 	}
 	
 	@Test
