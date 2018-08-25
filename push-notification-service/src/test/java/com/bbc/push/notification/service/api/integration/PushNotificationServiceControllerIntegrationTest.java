@@ -57,11 +57,11 @@ public class PushNotificationServiceControllerIntegrationTest {
 		this.createPostEndpoint = base.toString() + "/create/push?username=";
 		
 		this.userOne = new User();
-		userOne.setUsername("Jon");
+		userOne.setUsername("username1");
 		userOne.setAccessToken("accessToken");
     	
     	this.userTwo = new User();
-    	userTwo.setUsername("Simon");
+    	userTwo.setUsername("username2");
     	userTwo.setAccessToken("efgh5678");
 	}
 	
@@ -109,7 +109,7 @@ public class PushNotificationServiceControllerIntegrationTest {
 	public void testCreatePush() throws Exception {
 		log.info("testCreatePush");
 		
-		final String username = "Jon";
+		final String username = "username1";
 		Note note = new Note();
 		note.setBody("Hello, this message has been sent from JUnit 4!");
 		note.setTitle("Integration Test");
@@ -135,7 +135,7 @@ public class PushNotificationServiceControllerIntegrationTest {
 	public void testCreatePushIsNotCreated() {
 		log.info("testCreatePushIsNotCreated");
 		
-		final String username = "Simon";
+		final String username = "username2";
 		Note note = new Note();
 		note.setBody("Hello, this message has been sent from JUnit 4!");
 		note.setTitle("Integration Test");
