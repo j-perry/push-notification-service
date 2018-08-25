@@ -2,19 +2,19 @@ package com.bbc.push.notification.service.api;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.bbc.push.notification.service.model.User;
-import com.bbc.push.notification.service.services.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.hamcrest.Matchers.*;
@@ -25,13 +25,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
 /**
  * PushNotificationServiceControllerTest
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PushNotificationServiceControllerTest {
 	
 	@Autowired
@@ -89,16 +89,7 @@ public class PushNotificationServiceControllerTest {
     	user.setAccessToken("access-token");
     	user.setCreationTime(now.format(formatter));
     	user.setNumOfNotificationsPushed(0);
-    	
-    	String json = mapper.writeValueAsString(user);
-    	
-    	mockMvc.perform(MockMvcRequestBuilders.post("/create/user")
-    			.contentType(MediaType.APPLICATION_JSON_VALUE)
-    			.content(json)
-    			.accept(MediaType.APPLICATION_JSON_VALUE))
-    			.andExpect(status().isCreated())
-    			.andExpect(content().json(json));
-    	
+    	    	
     	mockMvc.perform(MockMvcRequestBuilders.get("/users/all")
     			.accept(MediaType.APPLICATION_JSON_VALUE))
     			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))

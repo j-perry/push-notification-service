@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import javax.xml.ws.soap.AddressingFeature.Responses;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -38,14 +36,18 @@ public class NotificationServiceImpl implements NotificationService {
 		LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 		
-		User newUser = new User();
-		newUser.setUsername(user.getUsername());
-		newUser.setAccessToken(user.getAccessToken());
-		newUser.setCreationTime(now.format(formatter));
-		newUser.setNumOfNotificationsPushed(0);
-		
-		notificationRepositoryImpl.addUser(newUser);
-		return newUser;
+        if (findUser(user.getUsername()) == null) {
+        	User newUser = new User();
+    		newUser.setUsername(user.getUsername());
+    		newUser.setAccessToken(user.getAccessToken());
+    		newUser.setCreationTime(now.format(formatter));
+    		newUser.setNumOfNotificationsPushed(0);
+    		
+    		notificationRepositoryImpl.addUser(newUser);
+    		return newUser;
+        }
+        
+		return null;
 	}
 
 	public ResponseEntity<User> createPush(String username, Note note) throws Exception {
@@ -62,7 +64,7 @@ public class NotificationServiceImpl implements NotificationService {
 		headers.add("Access-Token", user.getAccessToken());
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<Note> entity = new HttpEntity<Note>(note, headers);
-		log.info("Response Headers: " + entity.getHeaders().toString());		
+		log.info("Response Headers: " + entity.getHeaders().toString());
 		log.info("Access-Token: " + user.getAccessToken());
 		
 		try {

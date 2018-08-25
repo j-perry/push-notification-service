@@ -40,7 +40,7 @@ public class PushNotificationServiceController {
 		if (responseUser != null) {
 			return new ResponseEntity<User>(responseUser, HttpStatus.CREATED);
 		} else {
-			return new ResponseEntity<User>(responseUser, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<User>(user, HttpStatus.CONFLICT);
 		}
 	}
 	

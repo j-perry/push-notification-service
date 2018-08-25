@@ -58,7 +58,7 @@ public class PushNotificationServiceControllerIntegrationTest {
 				
 		this.userOne = new User();
 		userOne.setUsername("Jon");
-		userOne.setAccessToken("accessToken");
+		userOne.setAccessToken("o.CL5lGFQnhHz68Ti7Wn498sFULpCiBmgk");
     	
     	this.userTwo = new User();
     	userTwo.setUsername("Simon");
@@ -66,28 +66,22 @@ public class PushNotificationServiceControllerIntegrationTest {
 	}
 	
 	@Test
-	public void testCreateUser() throws Exception {
-		String accessToken = "accessToken";
-		String username = "Jon";
+	public void testDuplicateUserIsNotCreated() throws Exception {
+		log.info("testDuplicateUserIsNotCreated");
 		
-		HttpHeaders headers = new HttpHeaders();
+    	HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<User> entity = new HttpEntity<User>(userOne, headers);
 		
-		log.info(createUserEndpoint);
-		ResponseEntity<User> response = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, entity, User.class);
-		
-		assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));
-		assertThat(response.getHeaders().getContentType(), equalTo(MediaType.APPLICATION_JSON_UTF8));
-		assertThat(response.getBody(), is(notNullValue()));
-		assertThat(response.getBody().getAccessToken(), equalTo(accessToken));
-		assertThat(response.getBody().getUsername(), equalTo(username));
+		HttpEntity<User> userOneEntity = new HttpEntity<User>(userOne, headers);
+    	ResponseEntity<User> postResponseOne = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, userOneEntity, User.class);
+		assertThat(postResponseOne.getStatusCode(), equalTo(HttpStatus.CONFLICT));
 	}
 	
 	@Test
 	public void testGetAllUsers() throws Exception {
-		final int length = 2;
-    	
+		log.info("testGetAllUsers");
+		
+		final int length = 2;		    	
     	HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		
@@ -113,6 +107,9 @@ public class PushNotificationServiceControllerIntegrationTest {
 	
 	@Test
 	public void testCreatePush() throws Exception {
+		log.info("testCreatePush");
+		
+		final String createPostEndpoint = base.toString() + "/create/push?username=";
 		final String username = "Jon";
 		Note note = new Note();
 		note.setBody("Hello, this message has been sent from JUnit 4!");
@@ -121,10 +118,6 @@ public class PushNotificationServiceControllerIntegrationTest {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-		HttpEntity<User> entity = new HttpEntity<User>(userOne, headers);
-		
-		ResponseEntity<User> createResponse = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, entity, User.class);
-		assertThat(createResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
 		
 		HttpEntity<Note> postEntity = new HttpEntity<Note>(note, headers);
 		log.info(new String(createPostEndpoint + username));
@@ -141,6 +134,9 @@ public class PushNotificationServiceControllerIntegrationTest {
 	
 	@Test
 	public void testCreatePushIsNotCreated() {
+		log.info("testCreatePushIsNotCreated");
+		
+		final String createPostEndpoint = base.toString() + "/create/push?username=";
 		final String username = "Simon";
 		Note note = new Note();
 		note.setBody("Hello, this message has been sent from JUnit 4!");
@@ -149,10 +145,6 @@ public class PushNotificationServiceControllerIntegrationTest {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-		HttpEntity<User> entity = new HttpEntity<User>(userTwo, headers);
-		
-		ResponseEntity<User> createResponse = restTemplate.exchange(createUserEndpoint, HttpMethod.POST, entity, User.class);
-		assertThat(createResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
 		
 		HttpEntity<Note> postEntity = new HttpEntity<Note>(note, headers);
 		log.info(new String(createPostEndpoint + username));
