@@ -5,7 +5,7 @@ Push Notification Service written in Java 8, Spring Boot, Maven and TDD/BDD usin
 
 To run the application, please use Eclipse. It may be started using ```mvn install clean spring-boot:run``` from a terminal inside it's project directory, or ```install clean spring-boot:run``` from inside Eclipse.
 
-There are no databases used for this application - data is persisted locally throughout the lifespan of the application.
+There are no databases used for this application - data is created and read locally throughout the lifespan of the application.
 
 ## Usage
 
@@ -33,6 +33,17 @@ This will return the following response:
     "username": "user", 
     "accessToken": "<access-token>",
     “creationTime”: “<YYYY-mm-dd HH:mm:ss>",
+    “numOfNotificationsPushed”: 0
+} 
+```
+
+Duplicate entries cannot be made. If you try to create a duplicate user entry, you will receive the following ```409 - Conflict``` response:
+
+```
+{
+    "username": "Jon", 
+    "accessToken": "abcd1234",
+    “creationTime”: “24-08-2018 16:57:41",
     “numOfNotificationsPushed”: 0
 } 
 ```
