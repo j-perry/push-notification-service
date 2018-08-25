@@ -43,7 +43,7 @@ Duplicate entries cannot be made. If you try to create a duplicate user entry, y
 {
     "username": "Jon", 
     "accessToken": "abcd1234",
-    “creationTime”: “24-08-2018 16:57:41",
+    “creationTime”: null,
     “numOfNotificationsPushed”: 0
 } 
 ```
