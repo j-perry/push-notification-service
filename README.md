@@ -5,7 +5,7 @@ Push Notification Service written in Java 8, Spring Boot, Maven and TDD/BDD usin
 
 To run the application, please use Eclipse. It may be started using ```mvn install clean spring-boot:run``` from a terminal inside it's project directory, or ```install clean spring-boot:run``` from inside Eclipse.
 
-There are no databases used for this application - data is persisted locally throughout the lifespan of the application.
+There are no databases used for this application - data is created and read locally throughout the lifespan of the application.
 
 ## Usage
 
