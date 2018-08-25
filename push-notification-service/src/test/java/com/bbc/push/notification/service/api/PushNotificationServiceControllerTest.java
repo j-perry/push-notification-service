@@ -81,15 +81,7 @@ public class PushNotificationServiceControllerTest {
     }
     
     @Test
-    public void testGetAllUsers() throws Exception {
-    	LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");    	
-    	
-    	user.setUsername("username1");
-    	user.setAccessToken("access-token");
-    	user.setCreationTime(now.format(formatter));
-    	user.setNumOfNotificationsPushed(0);
-    	    	
+    public void testGetAllUsers() throws Exception {    	    	
     	mockMvc.perform(MockMvcRequestBuilders.get("/users/all")
     			.accept(MediaType.APPLICATION_JSON_VALUE))
     			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
