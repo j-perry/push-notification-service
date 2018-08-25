@@ -7,7 +7,7 @@ To run the application, please use Eclipse. It may be started using ```mvn insta
 
 Before running the application, the integration tests will require a valid Pushbullet Access Token. Replace ```.setAccessToken("accessToken")``` on line 61 in ```PushNotificationServiceControllerIntegrationTest.java``` with the Access Token sent, or one created inside Pushbullet itself.
 
-There are no databases used for this application - data is created and read locally throughout the lifespan of the application.
+There are no databases used for this application - data is created and read locally throughout the lifespan of the server.
 
 ## Usage
 
