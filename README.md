@@ -23,7 +23,7 @@ This endpoint creates a new user, passing into the body:
 
 ```
 {
-    "username": "<name>",
+    "username": "<user>",
     "accessToken": "<access-token>"
 }
 ```
@@ -32,7 +32,7 @@ This will return the following response:
 
 ```
 {
-    "username": "user", 
+    "username": "<user>", 
     "accessToken": "<access-token>",
     “creationTime”: “<YYYY-mm-dd HH:mm:ss>",
     “numOfNotificationsPushed”: 0
@@ -43,8 +43,8 @@ Duplicate entries cannot be made. If you try to create a duplicate user entry, y
 
 ```
 {
-    "username": "Jon", 
-    "accessToken": "abcd1234",
+    "username": "user", 
+    "accessToken": "<access-token>",
     “creationTime”: null,
     “numOfNotificationsPushed”: 0
 } 
