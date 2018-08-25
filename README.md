@@ -34,7 +34,7 @@ This will return the following response:
 {
     "username": "<user>", 
     "accessToken": "<access-token>",
-    “creationTime”: “<YYYY-mm-dd HH:mm:ss>",
+    “creationTime”: “<YYYY-mm-ddTHH:mm:ss>",
     “numOfNotificationsPushed”: 0
 } 
 ```
@@ -61,13 +61,13 @@ This will return the following response:
     {
         "username": "<user>",
         "accessToken": “<access-token>",
-        "creationTime": "<YYYY-mm-dd HH:mm:ss>",
+        "creationTime": "<YYYY-mm-ddTHH:mm:ss>",
         "numOfNotificationsPushed": 0
     },
     {
         "username": "<user>",
         "accessToken": “<access-token>",
-        "creationTime": "<YYYY-mm-dd HH:mm:ss>",
+        "creationTime": "<YYYY-mm-ddTHH:mm:ss>",
         "numOfNotificationsPushed": 0
     }
 ]
@@ -99,7 +99,7 @@ This will return the following response:
 {
     "username": "<user>",
     "accessToken": "<access-token>",
-    "creationTime": "<YYYY-mm-dd HH:mm:ss>",
+    "creationTime": "<YYYY-mm-ddTHH:mm:ss>",
     "numOfNotificationsPushed": 1
 }
 ```
