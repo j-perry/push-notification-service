@@ -55,10 +55,10 @@ public class PushNotificationServiceControllerIntegrationTest {
 		this.base = new URL("http://localhost:" + port + "/" + servletContext.getContextPath());
 		this.createUserEndpoint = base.toString() + "/create/user";
 		this.createPostEndpoint = base.toString() + "/create/push?username=";
-				
+		
 		this.userOne = new User();
 		userOne.setUsername("Jon");
-		userOne.setAccessToken("o.CL5lGFQnhHz68Ti7Wn498sFULpCiBmgk");
+		userOne.setAccessToken("accessToken");
     	
     	this.userTwo = new User();
     	userTwo.setUsername("Simon");
@@ -109,7 +109,6 @@ public class PushNotificationServiceControllerIntegrationTest {
 	public void testCreatePush() throws Exception {
 		log.info("testCreatePush");
 		
-		final String createPostEndpoint = base.toString() + "/create/push?username=";
 		final String username = "Jon";
 		Note note = new Note();
 		note.setBody("Hello, this message has been sent from JUnit 4!");
@@ -136,7 +135,6 @@ public class PushNotificationServiceControllerIntegrationTest {
 	public void testCreatePushIsNotCreated() {
 		log.info("testCreatePushIsNotCreated");
 		
-		final String createPostEndpoint = base.toString() + "/create/push?username=";
 		final String username = "Simon";
 		Note note = new Note();
 		note.setBody("Hello, this message has been sent from JUnit 4!");
