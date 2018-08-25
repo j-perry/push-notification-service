@@ -43,7 +43,7 @@ Duplicate entries cannot be made. If you try to create a duplicate user entry, y
 
 ```
 {
-    "username": "user", 
+    "username": "<user>", 
     "accessToken": "<access-token>",
     “creationTime”: null,
     “numOfNotificationsPushed”: 0
@@ -59,15 +59,15 @@ This will return the following response:
 ```
 [
     {
-        "username": "name",
-        "accessToken": “access-token",
-        "creationTime": "24-08-2018 16:56:10",
+        "username": "<user>",
+        "accessToken": “<access-token>",
+        "creationTime": "<YYYY-mm-dd HH:mm:ss>",
         "numOfNotificationsPushed": 0
     },
     {
-        "username": "name",
-        "accessToken": “access-token",
-        "creationTime": "24-08-2018 16:57:41",
+        "username": "<user>",
+        "accessToken": “<access-token>",
+        "creationTime": "<YYYY-mm-dd HH:mm:ss>",
         "numOfNotificationsPushed": 0
     }
 ]
@@ -97,9 +97,9 @@ This will return the following response:
 
 ```
 {
-    "username": "name",
-    "accessToken": "access-token",
-    "creationTime": "24-08-2018 17:38:41",
+    "username": "<user>",
+    "accessToken": "<access-token>",
+    "creationTime": "<YYYY-mm-dd HH:mm:ss>",
     "numOfNotificationsPushed": 1
 }
 ```
