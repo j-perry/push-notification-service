@@ -5,7 +5,7 @@ Push Notification Service written in Java 8, Spring Boot, Maven and TDD/BDD usin
 
 To run the application, please use Eclipse. It may be started using ```mvn install clean spring-boot:run``` from a terminal inside it's project directory, or ```install clean spring-boot:run``` from inside Eclipse.
 
-Before running the application, the integration tests will require a valid Pushbullet Access Token. Replace ```.setAccessToken("accessToken")``` on line 61 in ```com.bbc.push.notification.service.api.integration.PushNotificationServiceControllerIntegrationTest.java``` with one sent or one created yourself.
+Before running the application, the integration tests will require a valid Pushbullet Access Token. Replace ```.setAccessToken("accessToken")``` on line 61 in ```PushNotificationServiceControllerIntegrationTest.java``` with the Access Token sent, or one created inside Pushbullet itself.
 
 There are no databases used for this application - data is created and read locally throughout the lifespan of the application.
 
