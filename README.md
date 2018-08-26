@@ -17,6 +17,8 @@ There are three RESTful API endpoints. They may be accessed as follows:
 - http://localhost:8080//PushNotificationService/users/all
 - http://localhost:8080//PushNotificationService/create/push?username
 
+Before use, you will need to create a [Pushbullet](https://www.pushbullet.com/) account and generate an Access Token. Once registered, you will need to install either the [Chrome extension](https://chrome.google.com/webstore/detail/pushbullet/chlffgpmiacpedhhbkiomidkjlcfhogd?hl=en) or install the iOS or Android app to view push notifications.
+
 ## POST */create/user*
 
 This endpoint creates a new user, passing into the body:
