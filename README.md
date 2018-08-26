@@ -21,6 +21,8 @@ Before use, you will need to create a [Pushbullet](https://www.pushbullet.com/) 
 
 ## POST */create/user*
 
+You will need to specify ```Content-Type``` of ```application/json``` in the Headers section, if testing using [Postman](https://www.getpostman.com/apps).
+
 This endpoint creates a new user, passing into the body:
 
 ```
