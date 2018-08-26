@@ -79,7 +79,7 @@ This endpoint creates a new push notification request to Pushbullet, passing in 
 
 Before creating a new push notification to Pushbullet, it will look up an existing user on the service and then retrieve the corresponding access token. 
 
-You will need to specify ```Content-Type``` of ```application/json``` in the Headers section, if testing using Postman.
+You will need to specify ```Content-Type``` of ```application/json``` in the Headers section, if testing using [Postman](https://www.getpostman.com/apps).
 
 To create a new push notification to Pushbullet, specify the following body:
 
