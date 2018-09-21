@@ -14,7 +14,8 @@ import com.bbc.push.notification.service.model.Note;
 import com.bbc.push.notification.service.model.User;
 import com.bbc.push.notification.service.services.NotificationServiceImpl;
 
-@RestController("/notifications")
+@RestController
+@RequestMapping(value = "/notifications")
 public class PushNotificationServiceNotificationsController {
 	
 	@Autowired

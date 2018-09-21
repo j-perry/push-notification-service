@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bbc.push.notification.service.model.User;
 import com.bbc.push.notification.service.services.NotificationServiceImpl;
 
-@RestController("/users")
+@RestController
+@RequestMapping(value = "/users")
 public class PushNotificationServiceUsersController {
 	
 	@Autowired
