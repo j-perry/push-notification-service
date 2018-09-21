@@ -55,16 +55,16 @@ public class PushNotificationServiceControllerTest {
         		.andExpect(status().isOk())
         		.andExpect(content().string(equalTo("Push Notification Service")));
     }
-    
+
     @Test
-    public void testCreateUser() throws Exception {    	
+    public void testCreateUser() throws Exception {
     	user.setUsername("username1");
     	user.setAccessToken("access-token");
     	user.setCreationTime(LocalDateTime.now().withNano(0).toString());
     	user.setNumOfNotificationsPushed(0);
-    	
+
     	String json = mapper.writeValueAsString(user);
-    	
+
     	mockMvc.perform(MockMvcRequestBuilders.post("/create/user")
     			.contentType(MediaType.APPLICATION_JSON_VALUE)
     			.content(json)
@@ -72,14 +72,28 @@ public class PushNotificationServiceControllerTest {
     			.andExpect(status().isCreated())
     			.andExpect(content().json(json));
     }
-    
+
     @Test
-    public void testGetAllUsers() throws Exception {    	    	
+    public void testGetAllUsers() throws Exception {
+    	user.setUsername("username1");
+    	user.setAccessToken("access-token");
+    	user.setCreationTime(LocalDateTime.now().withNano(0).toString());
+    	user.setNumOfNotificationsPushed(0);
+
+    	String json = mapper.writeValueAsString(user);
+
+    	mockMvc.perform(MockMvcRequestBuilders.post("/create/user")
+    			.contentType(MediaType.APPLICATION_JSON_VALUE)
+    			.content(json)
+    			.accept(MediaType.APPLICATION_JSON_VALUE))
+    			.andExpect(status().isCreated())
+    			.andExpect(content().json(json));
+
     	mockMvc.perform(MockMvcRequestBuilders.get("/users/all")
     			.accept(MediaType.APPLICATION_JSON_VALUE))
     			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
     			.andExpect(status().isOk())
     			.andExpect(jsonPath("$", hasSize(1)));
     }
-        
+
 }
