@@ -53,8 +53,8 @@ public class PushNotificationServiceControllerIntegrationTest {
 	@Before
 	public void setUp() throws Exception {
 		this.base = new URL("http://localhost:" + port + "/" + servletContext.getContextPath());
-		this.createUserEndpoint = base.toString() + "/create/user";
-		this.createPostEndpoint = base.toString() + "/create/push?username=";
+		this.createUserEndpoint = base.toString() + "/users/user";
+		this.createPostEndpoint = base.toString() + "/notifications/create/push?username=";
 		
 		this.userOne = new User();
 		userOne.setUsername("username1");
@@ -96,7 +96,7 @@ public class PushNotificationServiceControllerIntegrationTest {
 		headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> allUsersEntity = new HttpEntity<String>("parameters", headers);
 		
-		String getAllUsersEndpoint = base.toString() + "/users/all";
+		String getAllUsersEndpoint = base.toString() + "/users";
 		ResponseEntity<User[]> response = restTemplate.exchange(getAllUsersEndpoint, HttpMethod.GET, allUsersEntity, User[].class);
 		
 		assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));

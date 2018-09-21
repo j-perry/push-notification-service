@@ -50,7 +50,7 @@ public class PushNotificationServiceControllerTest {
 
     @Test
     public void testStatusEndpoint() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/")
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/status")
         		.accept(MediaType.APPLICATION_JSON_VALUE))
         		.andExpect(status().isOk())
         		.andExpect(content().string(equalTo("Push Notification Service")));
@@ -65,7 +65,7 @@ public class PushNotificationServiceControllerTest {
 
     	String json = mapper.writeValueAsString(user);
 
-    	mockMvc.perform(MockMvcRequestBuilders.post("/create/user")
+    	mockMvc.perform(MockMvcRequestBuilders.post("/users/user")
     			.contentType(MediaType.APPLICATION_JSON_VALUE)
     			.content(json)
     			.accept(MediaType.APPLICATION_JSON_VALUE))
@@ -82,14 +82,14 @@ public class PushNotificationServiceControllerTest {
 
     	String json = mapper.writeValueAsString(user);
 
-    	mockMvc.perform(MockMvcRequestBuilders.post("/create/user")
+    	mockMvc.perform(MockMvcRequestBuilders.post("/users/user")
     			.contentType(MediaType.APPLICATION_JSON_VALUE)
     			.content(json)
     			.accept(MediaType.APPLICATION_JSON_VALUE))
     			.andExpect(status().isCreated())
     			.andExpect(content().json(json));
 
-    	mockMvc.perform(MockMvcRequestBuilders.get("/users/all")
+    	mockMvc.perform(MockMvcRequestBuilders.get("/users")
     			.accept(MediaType.APPLICATION_JSON_VALUE))
     			.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
     			.andExpect(status().isOk())
