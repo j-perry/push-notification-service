@@ -2,6 +2,7 @@ package com.bbc.push.notification.service.services;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -33,19 +34,14 @@ public class NotificationServiceImpl implements NotificationService {
 		this.notificationRepositoryImpl = new NotificationRepositoryImpl();
 	}
 
-	public User createUser(User user) {
-        if (findUser(user.getUsername()) == null) {
-        	User newUser = new User();
-    		newUser.setUsername(user.getUsername());
-    		newUser.setAccessToken(user.getAccessToken());
-    		newUser.setCreationTime(LocalDateTime.now().withNano(0).toString());
-    		newUser.setNumOfNotificationsPushed(0);
-    		
-    		notificationRepositoryImpl.addUser(newUser);
-    		return newUser;
-        }
-        
-		return null;
+	public void createUser(User user) {
+        User newUser = new User();
+    	newUser.setUsername(user.getUsername());
+    	newUser.setAccessToken(user.getAccessToken());
+    	newUser.setCreationTime(LocalDateTime.now().withNano(0).toString());
+    	newUser.setNumOfNotificationsPushed(0);
+
+    	notificationRepositoryImpl.addUser(newUser);
 	}
 
 	public ResponseEntity<User> createPush(String username, Note note) throws Exception {

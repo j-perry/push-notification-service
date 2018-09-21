@@ -9,7 +9,7 @@ import com.bbc.push.notification.service.model.User;
 
 public interface NotificationService {
 
-	public User createUser(User user);
+	public void createUser(User user);
 	public ArrayList<User> getUsers();
 	public ResponseEntity<User> createPush(String username, Note note) throws Exception;
 	public User findUser(String username);
