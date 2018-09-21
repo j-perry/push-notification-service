@@ -1,6 +1,7 @@
 package com.bbc.push.notification.service.api;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,12 +37,15 @@ public class PushNotificationServiceController {
 	@ResponseBody
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		try {
-			notificationService.createUser(user);
+			if (Objects.isNull(notificationService.findUser(user.getUsername()))) {
+				notificationService.createUser(user);
+				return new ResponseEntity<User>(user, HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<User>(user, HttpStatus.CONFLICT);
+			}
 		} catch (Exception ex) {
 			return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
 		}
-
-		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/users/all",
