@@ -34,14 +34,14 @@ public class PushNotificationServiceController {
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<User> createUser(@RequestBody User user) throws Exception {
-		User responseUser = notificationService.createUser(user);
-		
-		if (responseUser != null) {
-			return new ResponseEntity<User>(responseUser, HttpStatus.CREATED);
-		} else {
-			return new ResponseEntity<User>(user, HttpStatus.CONFLICT);
+	public ResponseEntity<User> createUser(@RequestBody User user) {
+		try {
+			notificationService.createUser(user);
+		} catch (Exception ex) {
+			return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
 		}
+
+		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/users/all",
