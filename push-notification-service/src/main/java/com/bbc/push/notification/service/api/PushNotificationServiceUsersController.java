@@ -10,27 +10,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bbc.push.notification.service.model.Note;
 import com.bbc.push.notification.service.model.User;
 import com.bbc.push.notification.service.services.NotificationServiceImpl;
 
-@RestController
-public class PushNotificationServiceController {
+@RestController("/users")
+public class PushNotificationServiceUsersController {
 	
 	@Autowired
 	private NotificationServiceImpl notificationService;
 	
-	@RequestMapping(value = "/",
+	@RequestMapping(value = "/status",
 		method = RequestMethod.GET)
 	public String status() {
 		return new String("Push Notification Service");
 	}
 	
-	@RequestMapping(value = "/create/user",
+	@RequestMapping(value = "/user",
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -48,8 +46,7 @@ public class PushNotificationServiceController {
 		}
 	}
 	
-	@RequestMapping(value = "/users/all",
-			method = RequestMethod.GET,
+	@RequestMapping(method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<ArrayList<User>> getAllUsers() throws Exception {
@@ -60,16 +57,6 @@ public class PushNotificationServiceController {
 		} else {
 			return new ResponseEntity<ArrayList<User>>(users, HttpStatus.NOT_FOUND);
 		}
-	}
-	
-	@RequestMapping(value = "/create/push",
-		method = RequestMethod.POST,
-		consumes = MediaType.APPLICATION_JSON_VALUE,
-		produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public ResponseEntity<User> createPost(@RequestParam("username") String username,
-			@RequestBody Note note) throws Exception {
-		return notificationService.createPush(username, note);
 	}
 
 }
